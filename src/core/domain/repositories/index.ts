@@ -10,3 +10,6 @@ export * from "./planilla.repository";
 export * from "./tipodocumento.repository";
 export * from "./tipotrabajador.repository";
 export * from "./trabajador.repository";
+export * from "./practicantes.repository";
+export * from "./emitidos.repository";
+export * from "./recibidos.repository";

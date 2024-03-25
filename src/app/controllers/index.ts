@@ -11,3 +11,6 @@ export * from "./tipotrabajador.controller";
 export * from "./boleta.controller";
 export * from "./planilla.controller";
 export * from "./trabajador.controller";
+export * from "./practicantes.controller";
+export * from "./emitidos.controller";
+export * from "./recibidos.controller";

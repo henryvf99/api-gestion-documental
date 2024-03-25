@@ -77,3 +77,24 @@ export * from "./trabajador/delete-trabajador";
 export * from "./trabajador/get-all-trabajador";
 export * from "./trabajador/get-trabajador";
 export * from "./trabajador/update-trabajador";
+
+//practicantes
+export * from "./practicantes/create-practicantes";
+export * from "./practicantes/delete-practicantes";
+export * from "./practicantes/get-all-practicantes";
+export * from "./practicantes/get-practicantes";
+export * from "./practicantes/update-practicantes";
+
+//recibidos
+export * from "./recibidos/create-recibidos";
+export * from "./recibidos/delete-recibidos";
+export * from "./recibidos/get-all-recibidos";
+export * from "./recibidos/get-recibidos";
+export * from "./recibidos/update-recibidos";
+
+//emitidos
+export * from "./emitidos/create-emitidos";
+export * from "./emitidos/delete-emitidos";
+export * from "./emitidos/get-all-emitidos";
+export * from "./emitidos/get-emitidos";
+export * from "./emitidos/update-emitidos";

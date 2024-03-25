@@ -15,7 +15,10 @@ import {
   ValidatePlanillaMiddleware,
   ValidateTipodocumentoMiddleware,
   ValidateTipotrabajadorMiddleware,
-  ValidateTrabajadorMiddleware
+  ValidateTrabajadorMiddleware,
+  ValidateEmitidosMiddleware,
+  ValidatePracticantesMiddleware,
+  ValidateRecibidosMiddleware
 } from "@infrastructure/middlewares";
 import { ERROR_MIDDLEWARE } from "@decorators/express";
 import { 
@@ -29,7 +32,10 @@ import {
   PlanillaRepository,
   TipodocumentoRepository,
   TipotrabajadorRepository,
-  TrabajadorRepository
+  TrabajadorRepository,
+  RecibidosRepository,
+  EmitidosRepository,
+  PracticantesRepository
  } from "@core/domain/repositories";
 import {
   HelloWorld,
@@ -98,6 +104,24 @@ import {
   GetAllTrabajadorUseCase,
   GetTrabajadorUseCase,
   UpdateTrabajadorUseCase,
+
+  CreatePracticantesUseCase,
+  DeletePracticantesUseCase,
+  GetAllPracticantesUseCase,
+  GetPracticantesUseCase,
+  UpdatePracticantesUseCase,
+
+  CreateEmitidosUseCase,
+  DeleteEmitidosUseCase,
+  GetAllEmitidosUseCase,
+  GetEmitidosUseCase,
+  UpdateEmitidosUseCase,
+
+  CreateRecibidosUseCase,
+  DeleteRecibidosUseCase,
+  GetAllRecibidosUseCase,
+  GetRecibidosUseCase,
+  UpdateRecibidosUseCase,
 } from "@core/use-case";
 
 // Middlewares
@@ -117,6 +141,9 @@ export const VALIDATE_PLANILLA_MIDDLEWARE = new InjectionToken("VALIDATE_PLANILL
 export const VALIDATE_TIPODOCUMENTO_MIDDLEWARE = new InjectionToken("VALIDATE_TIPODOCUMENTO_MIDDLEWARE");
 export const VALIDATE_TIPOTRABAJADOR_MIDDLEWARE = new InjectionToken("VALIDATE_TIPOTRABAJADOR_MIDDLEWARE");
 export const VALIDATE_TRABAJADOR_MIDDLEWARE = new InjectionToken("VALIDATE_TRABAJADOR_MIDDLEWARE");
+export const VALIDATE_PRACTICANTES_MIDDLEWARE = new InjectionToken("VALIDATE_PRACTICANTES_MIDDLEWARE");
+export const VALIDATE_EMITIDOS_MIDDLEWARE = new InjectionToken("VALIDATE_EMITIDOS_MIDDLEWARE");
+export const VALIDATE_RECIBIDOS_MIDDLEWARE = new InjectionToken("VALIDATE_RECIBIDOS_MIDDLEWARE");
 
 // USE CASE
 export const HELLO_USE_CASE = new InjectionToken("HELLO_USE_CASE");
@@ -200,6 +227,27 @@ export const GET_ALL_TRABAJADOR_USE_CASE = new InjectionToken("GET_ALL_ETRABAJAD
 export const GET_TRABAJADOR_USE_CASE = new InjectionToken("GET_TRABAJADOR_USE_CASE");
 export const UPDATE_TRABAJADOR_USE_CASE = new InjectionToken("UPDATE_TRABAJADOR_USE_CASE");
 
+//PRACTICANTES
+export const CREATE_PRACTICANTES_USE_CASE = new InjectionToken("CREATE_PRACTICANTES_USE_CASE");
+export const DELETE_PRACTICANTES_USE_CASE = new InjectionToken("DELETE_PRACTICANTES_USE_CASE");
+export const GET_ALL_PRACTICANTES_USE_CASE = new InjectionToken("GET_ALL_EPRACTICANTESUSE_CASE");
+export const GET_PRACTICANTES_USE_CASE = new InjectionToken("GET_PRACTICANTES_USE_CASE");
+export const UPDATE_PRACTICANTES_USE_CASE = new InjectionToken("UPDATE_PRACTICANTES_USE_CASE");
+
+//EMITIDOS
+export const CREATE_EMITIDOS_USE_CASE = new InjectionToken("CREATE_EMITIDOS_USE_CASE");
+export const DELETE_EMITIDOS_USE_CASE = new InjectionToken("DELETE_EMITIDOS_USE_CASE");
+export const GET_ALL_EMITIDOS_USE_CASE = new InjectionToken("GET_ALL_EEMITIDOSUSE_CASE");
+export const GET_EMITIDOS_USE_CASE = new InjectionToken("GET_EMITIDOS_USE_CASE");
+export const UPDATE_EMITIDOS_USE_CASE = new InjectionToken("UPDATE_EMITIDOS_USE_CASE");
+
+//RECIBIDOS
+export const CREATE_RECIBIDOS_USE_CASE = new InjectionToken("CREATE_RECIBIDOS_USE_CASE");
+export const DELETE_RECIBIDOS_USE_CASE = new InjectionToken("DELETE_RECIBIDOS_USE_CASE");
+export const GET_ALL_RECIBIDOS_USE_CASE = new InjectionToken("GET_ALL_ERECIBIDOSUSE_CASE");
+export const GET_RECIBIDOS_USE_CASE = new InjectionToken("GET_RECIBIDOS_USE_CASE");
+export const UPDATE_RECIBIDOS_USE_CASE = new InjectionToken("UPDATE_RECIBIDOS_USE_CASE");
+
 // Repository
 export const USER_REPOSITORY = new InjectionToken("USER_REPOSITORY");
 export const ROL_REPOSITORY = new InjectionToken("ROL_REPOSITORY");
@@ -212,6 +260,9 @@ export const PLANILLA_REPOSITORY = new InjectionToken("PLANILLA_REPOSITORY");
 export const TIPODOCUMENTO_REPOSITORY = new InjectionToken("TIPODOCUMENTO_REPOSITORY");
 export const TIPOTRABAJADOR_REPOSITORY = new InjectionToken("TIPOTRABAJADOR_REPOSITORY");
 export const TRABAJADOR_REPOSITORY = new InjectionToken("TRABAJADOR_REPOSITORY");
+export const PRACTICANTES_REPOSITORY = new InjectionToken("PRACTICANTES_REPOSITORY");
+export const EMITIDOS_REPOSITORY = new InjectionToken("EMITIDOS_REPOSITORY");
+export const RECIBIDOS_REPOSITORY = new InjectionToken("RECIBIDOS_REPOSITORY");
 
 // Container of dependency
 Container.provide([
@@ -232,6 +283,9 @@ Container.provide([
   { provide: VALIDATE_TIPODOCUMENTO_MIDDLEWARE, useClass: ValidateTipodocumentoMiddleware },
   { provide: VALIDATE_TIPOTRABAJADOR_MIDDLEWARE, useClass: ValidateTipotrabajadorMiddleware },
   { provide: VALIDATE_TRABAJADOR_MIDDLEWARE, useClass: ValidateTrabajadorMiddleware },
+  { provide: VALIDATE_PRACTICANTES_MIDDLEWARE, useClass: ValidatePracticantesMiddleware },
+  { provide: VALIDATE_EMITIDOS_MIDDLEWARE, useClass: ValidateEmitidosMiddleware },
+  { provide: VALIDATE_RECIBIDOS_MIDDLEWARE, useClass: ValidateRecibidosMiddleware },
 
   { provide: HELLO_USE_CASE, useClass: HelloWorld },
 
@@ -303,6 +357,24 @@ Container.provide([
   { provide: GET_TRABAJADOR_USE_CASE, useClass: GetTrabajadorUseCase },
   { provide: UPDATE_TRABAJADOR_USE_CASE, useClass: UpdateTrabajadorUseCase },
 
+  { provide: CREATE_PRACTICANTES_USE_CASE, useClass: CreatePracticantesUseCase },
+  { provide: DELETE_PRACTICANTES_USE_CASE, useClass: DeletePracticantesUseCase },
+  { provide: GET_ALL_PRACTICANTES_USE_CASE, useClass: GetAllPracticantesUseCase },
+  { provide: GET_PRACTICANTES_USE_CASE, useClass: GetPracticantesUseCase },
+  { provide: UPDATE_PRACTICANTES_USE_CASE, useClass: UpdatePracticantesUseCase },
+
+  { provide: CREATE_EMITIDOS_USE_CASE, useClass: CreateEmitidosUseCase },
+  { provide: DELETE_EMITIDOS_USE_CASE, useClass: DeleteEmitidosUseCase },
+  { provide: GET_ALL_EMITIDOS_USE_CASE, useClass: GetAllEmitidosUseCase },
+  { provide: GET_EMITIDOS_USE_CASE, useClass: GetEmitidosUseCase },
+  { provide: UPDATE_EMITIDOS_USE_CASE, useClass: UpdateEmitidosUseCase },
+
+  { provide: CREATE_RECIBIDOS_USE_CASE, useClass: CreateRecibidosUseCase },
+  { provide: DELETE_RECIBIDOS_USE_CASE, useClass: DeleteRecibidosUseCase },
+  { provide: GET_ALL_RECIBIDOS_USE_CASE, useClass: GetAllRecibidosUseCase },
+  { provide: GET_RECIBIDOS_USE_CASE, useClass: GetRecibidosUseCase },
+  { provide: UPDATE_RECIBIDOS_USE_CASE, useClass: UpdateRecibidosUseCase },
+
   { provide: USER_REPOSITORY, useClass: UserRepository },
   { provide: ROL_REPOSITORY, useClass: RolRepository },
   { provide: ANIO_REPOSITORY, useClass: AnioRepository },
@@ -313,5 +385,8 @@ Container.provide([
   { provide: PLANILLA_REPOSITORY, useClass: PlanillaRepository },
   { provide: TIPODOCUMENTO_REPOSITORY, useClass: TipodocumentoRepository },
   { provide: TIPOTRABAJADOR_REPOSITORY, useClass: TipotrabajadorRepository },
-  { provide: TRABAJADOR_REPOSITORY, useClass: TrabajadorRepository }
+  { provide: TRABAJADOR_REPOSITORY, useClass: TrabajadorRepository },
+  { provide: PRACTICANTES_REPOSITORY, useClass: PracticantesRepository },
+  { provide: EMITIDOS_REPOSITORY, useClass: EmitidosRepository },
+  { provide: RECIBIDOS_REPOSITORY, useClass: RecibidosRepository }
 ]);

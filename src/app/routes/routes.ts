@@ -11,7 +11,10 @@ import {
   TipotrabajadorController,
   BoletaController,
   PlanillaController,
-  TrabajadorController
+  TrabajadorController,
+  PracticantesController,
+  EmitidosController,
+  RecibidosController
 } from "@app/controllers";
 import { attachControllers } from "@decorators/express";
 import express from "express";
@@ -35,7 +38,10 @@ class Routes {
       TipotrabajadorController,
       BoletaController,
       PlanillaController,
-      TrabajadorController
+      TrabajadorController,
+      PracticantesController,
+      EmitidosController,
+      RecibidosController
     ]);
     return this.apiRouter;
   }
