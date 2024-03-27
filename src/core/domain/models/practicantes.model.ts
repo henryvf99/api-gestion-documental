@@ -12,8 +12,8 @@ interface PracticantesAttrs {
     horapracticas: string;
     area: AreaDoc;
     carrera: string;
-    fechaingreso: string;
-    fechasalida: string;
+    fingreso: string;
+    fsalida: string;
     file: Buffer;
     file2: Buffer;
     status: boolean;
@@ -26,8 +26,8 @@ export interface PracticantesDoc extends mongoose.Document {
     horapracticas: string;
     area: AreaDoc;
     carrera: string;
-    fechaingreso: string;
-    fechasalida: string;
+    fingreso: string;
+    fsalida: string;
     file: Buffer;
     file2: Buffer;
     status: boolean;
@@ -65,11 +65,11 @@ const practicantesSchema = new Schema(
         type: String,
         required: [true, "El campo carrera es requerido."]
     },
-    fechaingreso: {
+    fingreso: {
         type: String,
         required: [true, "El campo fecha de ingreso es requerido."]
     },
-    fechasalida: {
+    fsalida: {
         type: String,
         required: false
     },

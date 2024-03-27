@@ -9,6 +9,7 @@ const { Schema } = mongoose;
 
 interface TrabajadorAttrs {
   tipo: TipotrabajadorDoc;
+  regimen: string;
   nombres: string;
   apellidos: string;
   dni: string;
@@ -22,6 +23,7 @@ interface TrabajadorAttrs {
 
 export interface TrabajadorDoc extends mongoose.Document {
   tipo: TipotrabajadorDoc;
+  regimen: string;
   nombres: string;
   apellidos: string;
   dni: string;
@@ -44,6 +46,10 @@ const trabajadorSchema = new Schema(
       ref: "tipotrabajador",
       autopopulate: true,
       required: [true, "El tipo es requerido."],
+    },
+    regimen: {
+      type: String,
+      required: false
     },
     nombres: {
         type: String,

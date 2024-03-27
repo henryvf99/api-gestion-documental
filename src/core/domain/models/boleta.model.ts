@@ -9,6 +9,7 @@ interface BoletaAttrs {
     anio: AnioDoc;
     mes: MesDoc;
     tipotrabajador: TipotrabajadorDoc;
+    regimen: string;
     observacion: string;
     file: Buffer;
     status: boolean;
@@ -18,6 +19,7 @@ export interface BoletaDoc extends mongoose.Document {
     anio: AnioDoc;
     mes: MesDoc;
     tipotrabajador: TipotrabajadorDoc;
+    regimen: string;
     observacion: string;
     file: Buffer;
     status: boolean;
@@ -33,19 +35,23 @@ const boletaSchema = new Schema(
         type: mongoose.Types.ObjectId,
         ref: "anio",
         autopopulate: true,
-        required: [true, "El año es reuqerido."],
+        required: [true, "El año es reuqerido."]
     },
     mes: {
         type: mongoose.Types.ObjectId,
         ref: "mes",
         autopopulate: true,
-        required: [true, "El mes es requerido."],
+        required: [true, "El mes es requerido."]
     },
     tipotrabajador: {
       type: mongoose.Types.ObjectId,
       ref: "tipotrabajador",
       autopopulate: true,
-      required: [true, "El tipotrabajador es requerido."],
+      required: [true, "El tipotrabajador es requerido."]
+    },
+    regimen: {
+      type: String,
+      required: false
     },
     observacion: {
         type: String,

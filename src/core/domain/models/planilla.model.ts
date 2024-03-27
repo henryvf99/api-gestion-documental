@@ -8,6 +8,7 @@ interface PlanillaAttrs {
     anio: AnioDoc;
     mes: MesDoc;
     tipotrabajador: TipotrabajadorDoc;
+    regimen: string;
     observacion: string;
     file: Buffer;
     status: boolean;
@@ -17,6 +18,7 @@ export interface PlanillaDoc extends mongoose.Document {
     anio: AnioDoc;
     mes: MesDoc;
     tipotrabajador: TipotrabajadorDoc;
+    regimen: string;
     observacion: string;
     file: Buffer;
     status: boolean;
@@ -45,6 +47,10 @@ const planillaSchema = new Schema(
       ref: "tipotrabajador",
       autopopulate: true,
       required: [true, "El tipotrabajador es requerido."],
+    },
+    regimen: {
+      type: String,
+      required: false
     },
     observacion: {
         type: String,

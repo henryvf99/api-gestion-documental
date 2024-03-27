@@ -2,18 +2,24 @@ import mongoose from "mongoose";
 import mongoose_autopopulate from "mongoose-autopopulate";
 import uniqueValidator from "mongoose-unique-validator";
 import bcrypt from "bcrypt";
-import { RolDoc } from '@core/domain/models';
+import { AreaDoc, RolDoc } from '@core/domain/models';
 const { Schema } = mongoose;
 
 interface UserAttrs {
   email: string;
   password: string;
+  nombres: string;
+  apellidos: string;
+  area: AreaDoc;
   rol: RolDoc;
 }
 
 export interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  nombres: string;
+  apellidos: string;
+  area: AreaDoc;
   rol: RolDoc;
   isValidPassword: (password: string) => Promise<any>;
 }
@@ -32,6 +38,20 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "El password es requerido"],
+    },
+    nombres: {
+      type: String,
+      required: [true, "El nombre es requerido."]
+    },
+    apellidos: {
+        type: String,
+        required: [true, "Los apellidos son requeridos."]
+    },
+    area: {
+      type: mongoose.Types.ObjectId,
+      ref: "area",
+      autopopulate: true,
+      required: [true, "El area es requerida."],
     },
     rol: {
       type: mongoose.Types.ObjectId,

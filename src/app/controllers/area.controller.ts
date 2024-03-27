@@ -47,7 +47,7 @@ import {
       private readonly deleteAreaUseCase: DeleteAreaUseCase
     ) {}
   
-    @Post("", [JwtMiddleware, ValidateAreaMiddleware])
+    @Post("", [ValidateAreaMiddleware])
     async create(
       @Request() req: IRequest,
       @Response() res: IResponse,
